@@ -1,23 +1,27 @@
 package dev.jordanlima.CadastroDeUsuarios.usuarios;
 
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping
+@AllArgsConstructor
 public class UsuarioController {
-    @GetMapping("/register")
-    public String cadastroResponse() {
-        return "<h1 align='center'>Cadastro!</h1>";
-    }
+
+    @Autowired
+    private final UsuarioService usuarioService;
+
+    @PostMapping("/register")
+    public UsuarioModel create(@RequestBody UsuarioModel usuarioModel) { return  usuarioService.save(usuarioModel);}
+
     @GetMapping("/users")
-    public String usuariosResponse() {
-        return "<h1 align='center'>Usuários!</h1>";
-    }
-    @GetMapping("/login")
-    public String loginResponse() {
-        return "<h1 align='center'>Login!</h1>";
+    public List<UsuarioModel> getAll() { return usuarioService.getAll(); }
+
+    @DeleteMapping("/{id}")
+    public void delete (@PathVariable Long id) {usuarioService.delete(id);
     }
 }
