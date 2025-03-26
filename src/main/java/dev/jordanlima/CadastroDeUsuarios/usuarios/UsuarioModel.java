@@ -1,4 +1,4 @@
-package dev.jordanlima.CadastroDeUsuarios.models;
+package dev.jordanlima.CadastroDeUsuarios.usuarios;
 
 import jakarta.persistence.*;
 
@@ -8,10 +8,10 @@ public class CadastroModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
-    String name;
-    String email;
-    String password;
+    private Long id;
+    private String name;
+    private String email;
+    private String password;
 
     public CadastroModel() {
     }
