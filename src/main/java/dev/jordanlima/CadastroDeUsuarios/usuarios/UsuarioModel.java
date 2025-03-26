@@ -1,10 +1,17 @@
 package dev.jordanlima.CadastroDeUsuarios.usuarios;
 
+import dev.jordanlima.CadastroDeUsuarios.dispositivos.DispositivoModel;
 import jakarta.persistence.*;
+import lombok.*;
+
+import java.util.List;
 
 @Entity
-@Table("TB_REGISTER")
-public class CadastroModel {
+@Table(name = "TB_REGISTER")
+@AllArgsConstructor
+@Data
+@NoArgsConstructor
+public class UsuarioModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -13,36 +20,7 @@ public class CadastroModel {
     private String email;
     private String password;
 
-    public CadastroModel() {
-    }
+    @OneToMany(mappedBy = "usuario")
+    private List<DispositivoModel> dispositivos;
 
-    public CadastroModel(String name, String email, String password) {
-        this.name = name;
-        this.email = email;
-        this.password = password;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
 }
